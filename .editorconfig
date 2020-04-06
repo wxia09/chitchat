@@ -1,0 +1,25 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = crlf
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+max_line_length = 120
+tab_width = 2
+
+[*.scss]
+indent_size = 2
+
+[{*.cjs,*.wxs,*.js}]
+indent_size = 2
+
+[{*.css,*.wxss}]
+indent_size = 2
+
+[{*.ng,*.sht,*.html,*.shtm,*.shtml,*.htm}]
+indent_size = 4
+
+[{.babelrc,.prettierrc,.stylelintrc,.eslintrc,jest.config,bowerrc,*.json,*.jsb3,*.jsb2}]
+indent_size = 4
