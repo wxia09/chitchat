@@ -1,7 +1,12 @@
 import React from "react";
+import Index from "./views/index";
 
 function App() {
-  return <div>目标重构</div>;
+  return (
+    <div>
+      <Index />
+    </div>
+  );
 }
 
 export default App;
