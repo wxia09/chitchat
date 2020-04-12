@@ -1,15 +1,15 @@
-import React, {Component} from "react";
-import Chat from  "../chat";
+import React, { Component } from "react";
+import Chat from "../chat";
 import InputBox from "../inputBox";
 
-class News extends Component{
+class News extends Component {
   render() {
     return (
-      <div>
+      <div className="flex-sub">
         <Chat />
         <InputBox />
       </div>
-    )
+    );
   }
 }
 

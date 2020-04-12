@@ -1,12 +1,8 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 
 class Friends extends Component {
   render() {
-    return (
-      <div>
-        friends
-      </div>
-    )
+    return <div style={{ width: "300px" }}>friends</div>;
   }
 }
 
