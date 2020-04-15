@@ -1,5 +1,6 @@
 import React from "react";
 import PropsType from "prop-types";
+import DragSizeItem from "./DragSizeItem";
 import "./scss/index.scss";
 
 class DragSize extends React.Component {
@@ -13,7 +14,6 @@ class DragSize extends React.Component {
       left: 0,
       top: 0,
     };
-    this.topLeft = this.topLeft.bind(this);
     this.topRight = this.topRight.bind(this);
     this.top = this.top.bind(this);
     this.bottomLeft = this.bottomLeft.bind(this);
@@ -58,27 +58,6 @@ class DragSize extends React.Component {
       top,
     });
   }
-  topLeft(e) {
-    // console.log(e.target);
-    let ele = e.target;
-    console.log(e.pageX, e.pageY);
-    let { boxWidth, boxHeight, left, top, widowsWidth, widowsHeight } = this.state;
-    let { pageX, pageY } = e;
-    ele.onmousemove = (el) => {
-      let nowX = el.pageX;
-      let nowY = el.pageY;
-      this.setState({
-        boxWidth: Math.min(boxWidth - (nowX - pageX), widowsWidth),
-        boxHeight: Math.min(boxHeight - (nowY - pageY), widowsHeight),
-        left: Math.max(left + (nowX - pageX), 0),
-        top: Math.max(top + (nowY - pageY), 0),
-      });
-    };
-    document.onmouseup = () => {
-      ele.onmousemove = null;
-      document.onmouseup = null;
-    };
-  }
   topRight() {}
   top() {}
   bottomLeft() {}
@@ -97,7 +76,7 @@ class DragSize extends React.Component {
     };
     return (
       <div className="flex drag-size" style={boxStyle}>
-        <div className="top left corner" style={{ cursor: "nw-resize" }} onMouseDown={this.topLeft} />
+        <DragSizeItem className="top left corner" style={{ cursor: "nw-resize" }} />
         <div className="top right corner" style={{ cursor: "ne-resize" }} />
         <div className="bottom left corner" style={{ cursor: "sw-resize" }} />
         <div className="bottom right corner" style={{ cursor: "se-resize" }} />
