@@ -31,6 +31,8 @@ class DragSize extends React.Component {
     topLeft: PropsType.bool,
     bottomRight: PropsType.bool,
     bottomLeft: PropsType.bool,
+    cornerWidth: PropsType.number,
+    cornerHeight: PropsType.number,
   };
   static defaultProps = {
     top: true,
@@ -41,6 +43,10 @@ class DragSize extends React.Component {
     topLeft: true,
     bottomRight: true,
     bottomLeft: true,
+    cornerWidth: 20,
+    cornerHeight: 20,
+    middleWidth: 10,
+    middleHeight: 10,
   };
   componentDidMount() {
     let width = document.documentElement.clientWidth;
@@ -66,7 +72,9 @@ class DragSize extends React.Component {
   left() {}
   bottom() {}
   render() {
-    let { boxWidth, boxHeight, left, top } = this.state;
+    let { boxWidth, boxHeight, left, top, widowsWidth, widowsHeight } = this.state;
+    let { middleWidth, middleHeight, cornerWidth, cornerHeight, changeStyle } = this.props;
+    console.log(changeStyle);
     let boxStyle = {
       position: "relative",
       width: boxWidth + "px",
@@ -74,16 +82,80 @@ class DragSize extends React.Component {
       top: top + "px",
       left: left + "px",
     };
+    let params = {
+      boxHeight,
+      boxWidth,
+      widowsHeight,
+      widowsWidth,
+      top,
+      left,
+    };
     return (
       <div className="flex drag-size" style={boxStyle}>
-        <DragSizeItem className="top left corner" style={{ cursor: "nw-resize" }} />
-        <div className="top right corner" style={{ cursor: "ne-resize" }} />
-        <div className="bottom left corner" style={{ cursor: "sw-resize" }} />
-        <div className="bottom right corner" style={{ cursor: "se-resize" }} />
-        <div className="middle top" style={{ cursor: "n-resize", width: boxWidth - 20 - 20 + "px" }} />
-        <div className="middle right" style={{ cursor: "e-resize", height: boxHeight - 20 - 20 + "px" }} />
-        <div className="middle bottom" style={{ cursor: "s-resize", width: boxWidth - 20 - 20 + "px" }} />
-        <div className="middle left" style={{ cursor: "w-resize", height: boxHeight - 20 - 20 + "px" }} />
+        <DragSizeItem
+          cssStyle="top left corner"
+          inlineStyle={{ cursor: "nw-resize", width: cornerWidth + "px", height: cornerHeight + "px" }}
+          {...params}
+          type="top left"
+        />
+        <DragSizeItem
+          cssStyle="top right corner"
+          inlineStyle={{ cursor: "ne-resize", width: cornerWidth + "px", height: cornerHeight + "px" }}
+          {...params}
+          type="top right"
+        />
+        <DragSizeItem
+          cssStyle="bottom left corner"
+          inlineStyle={{ cursor: "sw-resize", width: cornerWidth + "px", height: cornerHeight + "px" }}
+          {...params}
+          type="bottom left"
+        />
+        <DragSizeItem
+          cssStyle="bottom right corner"
+          inlineStyle={{ cursor: "se-resize", width: cornerWidth + "px", height: cornerHeight + "px" }}
+          {...params}
+          type="bottom right"
+        />
+        <DragSizeItem
+          cssStyle="middle top"
+          type="top"
+          {...params}
+          inlineStyle={{
+            cursor: "n-resize",
+            width: boxWidth - cornerHeight - cornerWidth + "px",
+            height: middleHeight + "px",
+          }}
+        />
+        <DragSizeItem
+          cssStyle="middle right"
+          type="right"
+          {...params}
+          inlineStyle={{
+            cursor: "e-resize",
+            height: boxHeight - cornerHeight - cornerWidth + "px",
+            width: middleWidth + "px",
+          }}
+        />
+        <DragSizeItem
+          cssStyle="middle bottom"
+          type="bottom"
+          {...params}
+          inlineStyle={{
+            cursor: "s-resize",
+            width: boxWidth - cornerHeight - cornerWidth + "px",
+            height: middleHeight + "px",
+          }}
+        />
+        <DragSizeItem
+          cssStyle="middle left"
+          type="left"
+          {...params}
+          inlineStyle={{
+            cursor: "w-resize",
+            height: boxHeight - cornerHeight - cornerWidth + "px",
+            width: middleWidth + "px",
+          }}
+        />
         {this.props.children}
       </div>
     );

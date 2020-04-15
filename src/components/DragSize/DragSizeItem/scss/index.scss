@@ -1,0 +1,36 @@
+.corner {
+  position: absolute;
+  background: blue;
+  &.left {
+    left: 0;
+  }
+  &.right {
+    right: 0;
+  }
+  &.top {
+    top: 0;
+  }
+  &.bottom {
+    bottom: 0;
+  }
+}
+.middle {
+  position: absolute;
+  background: green;
+  &.top {
+    top: 0;
+    left: 20px;
+  }
+  &.left {
+    top: 20px;
+    left: 0;
+  }
+  &.right {
+    top: 20px;
+    right: 0;
+  }
+  &.bottom {
+    bottom: 0;
+    left: 20px;
+  }
+}
