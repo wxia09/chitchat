@@ -12,30 +12,50 @@ class DragSizeItem extends React.Component {
     this.onMouseDown = this.onMouseDown.bind(this);
   }
   onMouseDown(e) {
-    let { boxWidth, boxHeight, left, top, widowsWidth, widowsHeight } = this.props;
+    let { boxWidth, boxHeight, left, top, widowsWidth, widowsHeight, handleSize, type } = this.props;
     let { pageX, pageY } = e;
     document.onmousemove = (el) => {
       let nowX = el.pageX;
       let nowY = el.pageY;
-      this.props.changeStyle = {
-        boxWidth: Math.min(boxWidth - (nowX - pageX), widowsWidth),
-        boxHeight: Math.min(boxHeight - (nowY - pageY), widowsHeight),
-        left: Math.max(left + (nowX - pageX), 0),
-        top: Math.max(top + (nowY - pageY), 0),
+      let width = Math.min(boxWidth - (nowX - pageX), widowsWidth);
+      let height = Math.min(boxHeight - (nowY - pageY), widowsHeight);
+      let _left = Math.max(left + (nowX - pageX), 0);
+      let _top = Math.max(top + (nowY - pageY), 0);
+      handleSize({
+        boxWidth: width,
+        boxHeight: height,
+        left: _left,
+        top: _top,
+        right: Math.max(widowsWidth - width - _left, 0),
+        bottom: Math.max(widowsHeight - height - _top, 0),
+        type,
+      });
+      document.onmouseup = () => {
+        document.onmousemove = null;
+        document.onmouseup = null;
       };
-    };
-    document.onmouseup = () => {
-      document.onmousemove = null;
-      document.onmouseup = null;
     };
   }
   render() {
     let props = this.props;
-    let { boxWidth, boxHeight } = this.state;
-    let boxStyle = {
-      width: boxWidth + "px",
-      height: boxHeight + "px",
-    };
+    let { boxWidth, boxHeight, middleWidth, middleHeight, cornerWidth, cornerHeight, type } = props;
+    let boxStyle = {};
+    if (/^(top.left|top.right|bottom.left|bottom.right)/gi.test(type)) {
+      boxStyle = {
+        width: cornerWidth + "px",
+        height: cornerHeight + "px",
+      };
+    } else if (/^(left|right)/gi.test(type)) {
+      boxStyle = {
+        width: middleWidth + "px",
+        height: boxHeight - cornerHeight * 2 + "px",
+      };
+    } else if (/^(top|bottom)/gi.test(type)) {
+      boxStyle = {
+        width: boxWidth - cornerWidth * 2 + "px",
+        height: middleHeight + "px",
+      };
+    }
     return (
       <div
         className={props.cssStyle}

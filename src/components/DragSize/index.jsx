@@ -2,6 +2,7 @@ import React from "react";
 import PropsType from "prop-types";
 import DragSizeItem from "./DragSizeItem";
 import "./scss/index.scss";
+import { items } from "./data/data";
 
 class DragSize extends React.Component {
   constructor(props) {
@@ -11,16 +12,8 @@ class DragSize extends React.Component {
       widowsHeight: 0,
       boxWidth: 0,
       boxHeight: 0,
-      left: 0,
-      top: 0,
     };
-    this.topRight = this.topRight.bind(this);
-    this.top = this.top.bind(this);
-    this.bottomLeft = this.bottomLeft.bind(this);
-    this.bottomRight = this.bottomRight.bind(this);
-    this.right = this.right.bind(this);
-    this.left = this.left.bind(this);
-    this.bottom = this.bottom.bind(this);
+    this.handleSize = this.handleSize.bind(this);
   }
   static propsType = {
     top: PropsType.bool,
@@ -55,6 +48,8 @@ class DragSize extends React.Component {
     let boxHeight = height * 0.8;
     let left = (width - boxWidth) / 2;
     let top = (height - boxHeight) / 2;
+    let right = left;
+    let bottom = top;
     this.setState({
       widowsWidth: width,
       widowsHeight: height,
@@ -62,52 +57,110 @@ class DragSize extends React.Component {
       boxHeight,
       left,
       top,
+      right,
+      bottom,
     });
   }
-  topRight() {}
-  top() {}
-  bottomLeft() {}
-  bottomRight() {}
-  right() {}
-  left() {}
-  bottom() {}
+  handleSize({ boxWidth, boxHeight, left, top, right, bottom, type }) {
+    switch (type) {
+      case "top.left":
+        this.setState({
+          boxWidth,
+          boxHeight,
+          left,
+          top,
+        });
+        break;
+      case "top.right":
+        this.setState({
+          boxWidth,
+          boxHeight,
+          right,
+          top,
+        });
+        break;
+      case "bottom.left":
+        this.setState({
+          boxWidth,
+          boxHeight,
+          bottom,
+          left,
+        });
+        break;
+      case "bottom.right":
+        this.setState({
+          boxWidth,
+          boxHeight,
+          right,
+          bottom,
+        });
+        break;
+      case "top":
+        this.setState({
+          boxHeight,
+          top,
+        });
+        break;
+      case "left":
+        this.setState({
+          boxWidth,
+          left,
+        });
+        break;
+      case "right":
+        this.setState({
+          boxWidth,
+          right,
+        });
+        break;
+      case "bottom":
+        this.setState({
+          boxHeight,
+          bottom,
+        });
+        break;
+      default:
+        break;
+    }
+  }
   render() {
-    let { boxWidth, boxHeight, left, top, widowsWidth, widowsHeight } = this.state;
+    let { boxWidth, boxHeight, widowsWidth, widowsHeight, top, right, left, bottom } = this.state;
+    let { cornerWidth, cornerHeight, middleHeight, middleWidth } = this.props;
     let boxStyle = {
       position: "relative",
       width: boxWidth + "px",
       height: boxHeight + "px",
       top: top + "px",
       left: left + "px",
+      bottom,
+      right,
     };
     let params = {
       boxHeight,
       boxWidth,
       widowsHeight,
       widowsWidth,
-      top,
+      cornerWidth,
+      cornerHeight,
+      middleHeight,
+      middleWidth,
       left,
+      top,
+      bottom,
+      right,
     };
     return (
       <div className="flex drag-size" style={boxStyle}>
-        <DragSizeItem cssStyle="top left corner" inlineStyle={{ cursor: "nw-resize" }} {...params} type="top left" />
-        <DragSizeItem cssStyle="top right corner" inlineStyle={{ cursor: "ne-resize" }} {...params} type="top right" />
-        <DragSizeItem
-          cssStyle="bottom left corner"
-          inlineStyle={{ cursor: "sw-resize" }}
-          {...params}
-          type="bottom left"
-        />
-        <DragSizeItem
-          cssStyle="bottom right corner"
-          inlineStyle={{ cursor: "se-resize" }}
-          {...params}
-          type="bottom right"
-        />
-        <DragSizeItem cssStyle="middle top" type="top" {...params} inlineStyle={{ cursor: "n-resize" }} />
-        <DragSizeItem cssStyle="middle right" type="right" {...params} inlineStyle={{ cursor: "e-resize" }} />
-        <DragSizeItem cssStyle="middle bottom" type="bottom" {...params} inlineStyle={{ cursor: "s-resize" }} />
-        <DragSizeItem cssStyle="middle left" type="left" {...params} inlineStyle={{ cursor: "w-resize" }} />
+        {items.map((item, index) => (
+          <DragSizeItem
+            cssStyle={item.cssStyle}
+            key={index}
+            type={item.type}
+            handleSize={this.handleSize}
+            {...params}
+            inlineStyle={{ cursor: item.cursor }}
+          />
+        ))}
         {this.props.children}
       </div>
     );
