@@ -73,8 +73,6 @@ class DragSize extends React.Component {
   bottom() {}
   render() {
     let { boxWidth, boxHeight, left, top, widowsWidth, widowsHeight } = this.state;
-    let { middleWidth, middleHeight, cornerWidth, cornerHeight, changeStyle } = this.props;
-    console.log(changeStyle);
     let boxStyle = {
       position: "relative",
       width: boxWidth + "px",
@@ -92,70 +90,24 @@ class DragSize extends React.Component {
     };
     return (
       <div className="flex drag-size" style={boxStyle}>
-        <DragSizeItem
-          cssStyle="top left corner"
-          inlineStyle={{ cursor: "nw-resize", width: cornerWidth + "px", height: cornerHeight + "px" }}
-          {...params}
-          type="top left"
-        />
-        <DragSizeItem
-          cssStyle="top right corner"
-          inlineStyle={{ cursor: "ne-resize", width: cornerWidth + "px", height: cornerHeight + "px" }}
-          {...params}
-          type="top right"
-        />
+        <DragSizeItem cssStyle="top left corner" inlineStyle={{ cursor: "nw-resize" }} {...params} type="top left" />
+        <DragSizeItem cssStyle="top right corner" inlineStyle={{ cursor: "ne-resize" }} {...params} type="top right" />
         <DragSizeItem
           cssStyle="bottom left corner"
-          inlineStyle={{ cursor: "sw-resize", width: cornerWidth + "px", height: cornerHeight + "px" }}
+          inlineStyle={{ cursor: "sw-resize" }}
           {...params}
           type="bottom left"
         />
         <DragSizeItem
           cssStyle="bottom right corner"
-          inlineStyle={{ cursor: "se-resize", width: cornerWidth + "px", height: cornerHeight + "px" }}
+          inlineStyle={{ cursor: "se-resize" }}
           {...params}
           type="bottom right"
         />
-        <DragSizeItem
-          cssStyle="middle top"
-          type="top"
-          {...params}
-          inlineStyle={{
-            cursor: "n-resize",
-            width: boxWidth - cornerHeight - cornerWidth + "px",
-            height: middleHeight + "px",
-          }}
-        />
-        <DragSizeItem
-          cssStyle="middle right"
-          type="right"
-          {...params}
-          inlineStyle={{
-            cursor: "e-resize",
-            height: boxHeight - cornerHeight - cornerWidth + "px",
-            width: middleWidth + "px",
-          }}
-        />
-        <DragSizeItem
-          cssStyle="middle bottom"
-          type="bottom"
-          {...params}
-          inlineStyle={{
-            cursor: "s-resize",
-            width: boxWidth - cornerHeight - cornerWidth + "px",
-            height: middleHeight + "px",
-          }}
-        />
-        <DragSizeItem
-          cssStyle="middle left"
-          type="left"
-          {...params}
-          inlineStyle={{
-            cursor: "w-resize",
-            height: boxHeight - cornerHeight - cornerWidth + "px",
-            width: middleWidth + "px",
-          }}
-        />
+        <DragSizeItem cssStyle="middle top" type="top" {...params} inlineStyle={{ cursor: "n-resize" }} />
+        <DragSizeItem cssStyle="middle right" type="right" {...params} inlineStyle={{ cursor: "e-resize" }} />
+        <DragSizeItem cssStyle="middle bottom" type="bottom" {...params} inlineStyle={{ cursor: "s-resize" }} />
+        <DragSizeItem cssStyle="middle left" type="left" {...params} inlineStyle={{ cursor: "w-resize" }} />
         {this.props.children}
       </div>
     );

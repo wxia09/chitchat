@@ -1,9 +1,13 @@
 import React from "react";
 import "./scss/index.scss";
-function onMouseDown(e, props) {}
 class DragSizeItem extends React.Component {
   constructor(props) {
     super(props);
+    let { widowsWidth, widowsHeight } = this.props;
+    this.state = {
+      widowsWidth,
+      widowsHeight,
+    };
     this.props = props;
     this.onMouseDown = this.onMouseDown.bind(this);
   }
@@ -19,7 +23,6 @@ class DragSizeItem extends React.Component {
         left: Math.max(left + (nowX - pageX), 0),
         top: Math.max(top + (nowY - pageY), 0),
       };
-      // this.setState({ changeStyle });
     };
     document.onmouseup = () => {
       document.onmousemove = null;
@@ -28,10 +31,15 @@ class DragSizeItem extends React.Component {
   }
   render() {
     let props = this.props;
+    let { boxWidth, boxHeight } = this.state;
+    let boxStyle = {
+      width: boxWidth + "px",
+      height: boxHeight + "px",
+    };
     return (
       <div
         className={props.cssStyle}
-        style={{ ...props.inlineStyle }}
+        style={{ ...props.inlineStyle, ...boxStyle }}
         onMouseDown={(e) => this.onMouseDown(e, props)}
       />
     );
