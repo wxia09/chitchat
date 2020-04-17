@@ -17,17 +17,25 @@ class DragSizeItem extends React.Component {
     document.onmousemove = (el) => {
       let nowX = el.pageX;
       let nowY = el.pageY;
-      let width = Math.min(boxWidth - (nowX - pageX), widowsWidth);
-      let height = Math.min(boxHeight - (nowY - pageY), widowsHeight);
-      let _left = Math.max(left + (nowX - pageX), 0);
-      let _top = Math.max(top + (nowY - pageY), 0);
+      let x = nowX - pageX;
+      let y = nowY - pageY;
+      if (/^((top|bottom).)?right$/.test(type)) {
+        x *= -1;
+      }
+      if (/^bottom(.(right|left))?$/.test(type)) {
+        y *= -1;
+      }
+      let width = Math.min(boxWidth - x, widowsWidth - left - 2);
+      width = Math.max(width, 0);
+      let height = Math.min(boxHeight - y, widowsHeight - top);
+      height = Math.max(height, 0);
+      let _left = Math.max(left + x, 0);
+      let _top = Math.max(top + y, 0);
       handleSize({
         boxWidth: width,
         boxHeight: height,
         left: _left,
         top: _top,
-        right: Math.max(widowsWidth - width - _left, 0),
-        bottom: Math.max(widowsHeight - height - _top, 0),
         type,
       });
       document.onmouseup = () => {
