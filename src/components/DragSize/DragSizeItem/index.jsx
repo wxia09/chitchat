@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import "./scss/index.scss";
 class DragSizeItem extends React.Component {
   constructor(props) {
@@ -73,4 +73,5 @@ class DragSizeItem extends React.Component {
     );
   }
 }
-export default DragSizeItem;
+// 使用memo不起作用, 是因为数据依赖的关系, 因为所有都依赖于盒子的宽高, 而且这个数据是必传的
+export default memo(DragSizeItem);
