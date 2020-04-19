@@ -48,7 +48,7 @@ class DragSizeItem extends React.Component {
     let props = this.props;
     let { boxWidth, boxHeight, middleWidth, middleHeight, cornerWidth, cornerHeight, type } = props;
     let boxStyle = {};
-    if (/^(top.left|top.right|bottom.left|bottom.right)/gi.test(type)) {
+    if (/^(top.left|to:wp.right|bottom.left|bottom.right)/gi.test(type)) {
       boxStyle = {
         width: cornerWidth + "px",
         height: cornerHeight + "px",
