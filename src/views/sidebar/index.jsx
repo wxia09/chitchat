@@ -6,13 +6,11 @@ class Sidebar extends Component {
   render() {
     return (
       <div className="sidebar">
-        <Popover>
-          <div className="avatar" ref={React.createRef("2233")}>
+        <Popover content={"我是内容啊"} title={"我是标题啊"}>
+          <div className="avatar">
             <span />
             <img src={process.env.PUBLIC_URL + "/images/defaultAvatar.jpg"} alt="" width="40" height="40" />
           </div>
-          <div>22334</div>
-          <div>55555</div>
         </Popover>
       </div>
     );
