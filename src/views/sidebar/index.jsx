@@ -11,6 +11,8 @@ class Sidebar extends Component {
             <span />
             <img src={process.env.PUBLIC_URL + "/images/defaultAvatar.jpg"} alt="" width="40" height="40" />
           </div>
+          <div>22334</div>
+          <div>55555</div>
         </Popover>
       </div>
     );
