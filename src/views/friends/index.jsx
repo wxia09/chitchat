@@ -1,8 +1,14 @@
 import React, { Component } from "react";
+import "./scss/index.scss";
+import { FriendList } from "./component/item";
 
 class Friends extends Component {
   render() {
-    return <div style={{ width: "300px" }}>friends</div>;
+    return (
+      <div className={"friend"}>
+        <FriendList />
+      </div>
+    );
   }
 }
 
