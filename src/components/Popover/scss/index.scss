@@ -12,8 +12,6 @@
   }
   .wrap {
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
     background: #fff;
     width: 230px;
     height: 115px;
@@ -39,5 +37,21 @@
       overflow-y: auto;
       color: rgba(0, 0, 0, 0.65);
     }
+  }
+  .bottom {
+    bottom: -120px;
+    left: 40%;
+  }
+  .top {
+    top: -120px;
+    left: 40%;
+  }
+  .left {
+    left: -235px;
+    top: 25%;
+  }
+  .right {
+    right: -235px;
+    top: 25%;
   }
 }
