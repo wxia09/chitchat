@@ -10,24 +10,22 @@ class Popover extends React.Component {
     this.handleShow = this.handleShow.bind(this);
   }
   handleShow() {
-    console.log(this.state.show, 1);
-    this.setState({
-      show: !this.state.show,
-    });
-    console.log(2);
-  }
-  componentDidMount() {
-    document.addEventListener(
-      "click",
-      () => {
-        console.log(this.state.show, 2);
-        if (this.state.show) {
-          this.setState({ show: false });
-        }
+    const self = this;
+    this.setState(
+      {
+        show: !this.state.show,
       },
-      true
+      () => {
+        document.onclick = function () {
+          self.setState({
+            show: false,
+          });
+          document.onclick = null;
+        };
+      }
     );
   }
+  componentDidMount() {}
   render() {
     let { props } = this;
     if (!props.children) {
