@@ -9,6 +9,7 @@ class Popover extends React.Component {
     };
     this.handleShow = this.handleShow.bind(this);
   }
+
   handleShow() {
     const self = this;
     this.setState(
@@ -25,12 +26,15 @@ class Popover extends React.Component {
       }
     );
   }
+
   componentDidMount() {}
+
   render() {
     let { props } = this;
     if (!props.children) {
       throw new Error("必须传子组件");
     }
+    console.log(props.children);
     let children = props.children instanceof Array ? [...props.children] : [props.children];
     let firstChild = children.splice(0, 1)[0];
     return (
@@ -38,10 +42,17 @@ class Popover extends React.Component {
         {React.cloneElement(firstChild, {
           onClick: this.handleShow,
         })}
-        <div className={(this.state.show ? "show " : "") + "wrap"}>
-          <div className={"title border-bottom"}>{props.title}</div>
-          <div className={"content"}>{props.content}</div>
-        </div>
+        {children.length ? (
+          React.cloneElement(children[0], {
+            className:
+              (this.state.show ? "show " : "hide ") + children[0].props.className + " " + children[0].props.wrap || "",
+          })
+        ) : (
+          <div className={(this.state.show ? "show " : "hide ") + "wrap"}>
+            <div className={"title border-bottom"}>{props.title}</div>
+            <div className={"content"}>{props.content}</div>
+          </div>
+        )}
       </div>
     );
   }
