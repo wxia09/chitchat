@@ -1,10 +1,11 @@
 import React from "react";
-import Index from "./views/index";
+// import Index from "./views/index";
+import Router from './router/index';
 
 function App() {
   return (
     <div>
-      <Index />
+      <Router />
     </div>
   );
 }
