@@ -25,7 +25,7 @@ http.interceptors.response.use(
     switch (status) {
       case 401:
         history.push("login");
-        break;
+        return Promise.reject(err);
       default:
         return Promise.reject(err);
     }
