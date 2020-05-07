@@ -1,9 +1,8 @@
 .friend-list {
   display: flex;
-  justify-content: space-around;
   align-items: center;
-  width: 104px;
-  padding: 10px;
+  box-sizing: border-box;
+  padding: 5px 10px;
   background: #fff;
   border-color: #eee;
   border-top-width: 1px;
@@ -21,6 +20,6 @@
   }
   .nickname {
     height: auto;
-    margin-left: 10px;
+    margin-left: 5px;
   }
 }
