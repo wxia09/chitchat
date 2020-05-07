@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import "./scss/index.scss";
 import { http } from "../../utils/http";
@@ -24,6 +25,8 @@ class Login extends React.Component {
         let { data, token } = res.data;
         if (token) {
           window.localStorage.setItem("token", token);
+          this.props.setToken(token);
+          this.props.setUserInfo(data);
           history.replace("/");
         }
       })
@@ -65,4 +68,14 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default connect(
+  function mapStateToProps(state) {
+    return {};
+  },
+  function mapDispatchToProps(dispatch) {
+    return {
+      setToken: (v) => dispatch({ type: "token", value: v }),
+      setUserInfo: (v) => dispatch({ type: "userInfo", value: v }),
+    };
+  }
+)(Login);
