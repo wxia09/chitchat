@@ -58,7 +58,7 @@ class Popover extends React.Component {
         })}
         {children.length ? (
           React.cloneElement(children[0], {
-            className: (this.state.show ? "show " : "hide ") + children[0].props.className + " " + props.wrap,
+            className: (this.state.show ? "show " : "hide ") + (children[0].props.className || "") + " " + props.wrap,
           })
         ) : (
           <div className={(this.state.show ? "show " : "hide ") + "wrap " + props.placement}>
