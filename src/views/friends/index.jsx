@@ -27,7 +27,13 @@ class Friends extends Component {
           </div>
           <FriendList />
         </div>
-        <Dialog show={this.state.showAddFriend} title="添加好友" width="800px" height="600px">
+        <Dialog
+          show={this.state.showAddFriend}
+          title="添加好友"
+          width="800px"
+          height="600px"
+          cancel={this.handleShowAddFriend}
+        >
           <section className="search-friends">
             <input type="text" placeholder="请输入添加好的账号/昵称/姓名" className="search-input" />
             <button className="search-btn">检索</button>
