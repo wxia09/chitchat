@@ -2,11 +2,14 @@ import React from "react";
 import "./scss/item.scss";
 export const FriendList = (props) => {
   return (
-    <div className={"friend-list"}>
-      <div className={"avatar"}>
-        <img src={process.env.PUBLIC_URL + "/images/defaultAvatar.jpg"} alt="" />
+    <div className={"friend-list flex align-center"}>
+      <div className={"avatar-name flex align-center"}>
+        <div className={"avatar"}>
+          <img src={process.env.PUBLIC_URL + "/images/defaultAvatar.jpg"} alt="" />
+        </div>
+        <div className={"nickname"}>{props.name || "晚霞"}</div>
       </div>
-      <div className={"nickname"}>我是晚霞</div>
+      {props.children}
     </div>
   );
 };
