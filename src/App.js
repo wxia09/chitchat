@@ -7,13 +7,11 @@ import reducers from "./reducers/index";
 
 function App() {
   return (
-    <div>
-      <Provider store={reducers}>
-        <Context.Provider value={{}}>
-          <Router />
-        </Context.Provider>
-      </Provider>
-    </div>
+    <Provider store={reducers}>
+      <Context.Provider value={{}}>
+        <Router />
+      </Context.Provider>
+    </Provider>
   );
 }
 
