@@ -16,6 +16,7 @@ class Popover extends React.Component {
     placement: PropsType.string,
     content: PropsType.string,
     title: PropsType.string,
+    trigger: PropsType.string,
   };
 
   static defaultProps = {
@@ -23,22 +24,46 @@ class Popover extends React.Component {
     placement: "bottom",
     content: "",
     title: "",
+    trigger: "click",
   };
-
-  handleShow() {
+  handleHide() {
+    this.setState({
+      show: false,
+    });
+  }
+  handleTrigger() {
     const self = this;
+    switch (this.props.trigger) {
+      case "click":
+        return {
+          onClick() {
+            self.handleShow(() => {
+              document.onclick = function () {
+                self.handleHide();
+                document.onclick = null;
+              };
+            });
+          },
+        };
+      case "hover":
+        return {
+          onMouseEnter() {
+            self.handleShow();
+          },
+          onMouseLeave(e) {
+            self.handleHide();
+          },
+        };
+      default:
+        break;
+    }
+  }
+  handleShow(cb = () => {}) {
     this.setState(
       {
-        show: !this.state.show,
+        show: true,
       },
-      () => {
-        document.onclick = function () {
-          self.setState({
-            show: false,
-          });
-          document.onclick = null;
-        };
-      }
+      cb
     );
   }
 
@@ -49,19 +74,18 @@ class Popover extends React.Component {
     if (!props.children) {
       throw new Error("必须传子组件");
     }
+    let showClassName = this.state.show ? "show transition " : "hide ";
     let children = props.children instanceof Array ? [...props.children] : [props.children];
     let firstChild = children.splice(0, 1)[0];
     return (
       <div className="popover">
-        {React.cloneElement(firstChild, {
-          onClick: this.handleShow,
-        })}
+        {React.cloneElement(firstChild, this.handleTrigger())}
         {children.length ? (
           React.cloneElement(children[0], {
-            className: (this.state.show ? "show " : "hide ") + (children[0].props.className || "") + " " + props.wrap,
+            className: showClassName + (children[0].props.className || "") + " " + props.wrap,
           })
         ) : (
-          <div className={(this.state.show ? "show " : "hide ") + "wrap " + props.placement}>
+          <div className={showClassName + "wrap " + props.placement}>
             <div className={"title border-bottom"}>{props.title}</div>
             <div className={"content"}>{props.content}</div>
           </div>
