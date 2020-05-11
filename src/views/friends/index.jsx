@@ -13,10 +13,25 @@ class Friends extends Component {
       showAddFriend: false,
       inputValue: "12",
       extendList: [],
+      selFriend: {},
+      confirmAdd: false,
     };
     this.handleShowAddFriend = this.handleShowAddFriend.bind(this);
     this.handlerValue = this.handlerValue.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleConfirmAdd = this.handleConfirmAdd.bind(this);
+  }
+  handlerSelFriend(item) {
+    console.log(this);
+    this.setState({
+      selFriend: item,
+    });
+    this.handleConfirmAdd();
+  }
+  handleConfirmAdd() {
+    this.setState({
+      confirmAdd: !this.state.confirmAdd,
+    });
   }
   handleShowAddFriend() {
     this.setState({
@@ -70,11 +85,28 @@ class Friends extends Component {
               <FriendList item={item} key={item.id}>
                 <div className="flex-sub" />
                 <Popover trigger="hover">
-                  <i className="iconfont icon-add cursor-pointer" />
+                  <i
+                    className="iconfont icon-add cursor-pointer"
+                    onClick={() => {
+                      this.handlerSelFriend(item);
+                    }}
+                  />
                   <div className="friend-add-btn">添加</div>
                 </Popover>
               </FriendList>
             ))}
+          </section>
+        </Dialog>
+        <Dialog
+          show={this.state.confirmAdd}
+          title={"添加 " + this.state.selFriend.name}
+          width="400px"
+          height="300px"
+          cancel={this.handleConfirmAdd}
+        >
+          <section className="confirm-message">
+            <input type="text" />
+            <button>确认添加</button>
           </section>
         </Dialog>
       </>
