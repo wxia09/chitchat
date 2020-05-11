@@ -24,13 +24,13 @@ class Dialog extends React.Component {
       <>
         <div className={"mp-mask" + show} onClick={props.persistent ? props.cancel : () => {}} />
         <div className={"mp-wrap" + show} style={{ width: props.width, height: props.height }}>
-          <div className={"dialog"}>
+          <div className={"dialog flex flex-direction"}>
             <div className={"title"}>
               <span>{props.title}</span>
               <span style={{ flex: 1 }} />
               <span onClick={props.cancel} className="iconfont icon-close cursor-pointer" />
             </div>
-            <div className={"content"}>{props.children}</div>
+            <div className={"content flex-sub"}>{props.children}</div>
           </div>
         </div>
       </>
