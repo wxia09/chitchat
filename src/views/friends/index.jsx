@@ -15,14 +15,16 @@ class Friends extends Component {
       extendList: [],
       selFriend: {},
       confirmAdd: false,
+      confirmApplyFriendValue: "",
     };
     this.handleShowAddFriend = this.handleShowAddFriend.bind(this);
     this.handlerValue = this.handlerValue.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.handleConfirmAdd = this.handleConfirmAdd.bind(this);
+    this.handleConfirmApplyFriend = this.handleConfirmApplyFriend.bind(this);
+    this.handlerConfirmApplyFriendValue = this.handlerConfirmApplyFriendValue.bind(this);
   }
   handlerSelFriend(item) {
-    console.log(this);
     this.setState({
       selFriend: item,
     });
@@ -48,6 +50,20 @@ class Friends extends Component {
       this.setState({
         extendList: res.data.data,
       });
+    });
+  }
+  handlerConfirmApplyFriendValue(e) {
+    this.setState({
+      confirmApplyFriendValue: e.target.value,
+    });
+  }
+  handleConfirmApplyFriend() {
+    http("friend/apply", {
+      params: {
+        message: this.state.confirmApplyFriendValue,
+      },
+    }).then((res) => {
+      console.log(res);
     });
   }
   render() {
@@ -105,8 +121,12 @@ class Friends extends Component {
           cancel={this.handleConfirmAdd}
         >
           <section className="confirm-message">
-            <input type="text" />
-            <button>确认添加</button>
+            <input
+              type="text"
+              value={this.state.confirmApplyFriendValue}
+              onChange={this.handlerConfirmApplyFriendValue}
+            />
+            <button onClick={this.handleConfirmApplyFriend}>确认添加</button>
           </section>
         </Dialog>
       </>
