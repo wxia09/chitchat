@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import "./scss/index.scss";
 import { FriendList } from "./component/item";
 import Dialog from "../../components/Dialog";
@@ -25,8 +26,18 @@ class Friends extends Component {
     this.handlerConfirmApplyFriendValue = this.handlerConfirmApplyFriendValue.bind(this);
   }
   handlerSelFriend(item) {
+    let obj = {
+      name: item.name,
+      nickname: item.nickname,
+      avatar: item.avatar,
+      user_id: this.props.userInfo.id,
+      age: item.age,
+      gender: item.gender,
+      mobile: item.mobile,
+      apply_id: item.id,
+    };
     this.setState({
-      selFriend: item,
+      selFriend: obj,
     });
     this.handleConfirmAdd();
   }
@@ -61,9 +72,14 @@ class Friends extends Component {
     http("friend/apply", {
       params: {
         message: this.state.confirmApplyFriendValue,
+        ...this.state.selFriend,
       },
     }).then((res) => {
-      console.log(res);
+      let { status, message } = res.data;
+      if (status === "success") {
+        alert(message);
+        this.handleConfirmAdd();
+      }
     });
   }
   render() {
@@ -134,4 +150,8 @@ class Friends extends Component {
   }
 }
 
-export default Friends;
+export default connect(function mapStateToProps(state) {
+  return {
+    userInfo: state.defaultReducer.userInfo,
+  };
+})(Friends);
