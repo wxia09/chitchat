@@ -17,6 +17,16 @@
       vertical-align: middle;
     }
   }
+  .slider-icon {
+    padding: 10px 0;
+    i {
+      font-size: 25px;
+      color: rgb(135, 135, 135);
+    }
+    i.active {
+      color: rgb(7, 193, 96);
+    }
+  }
   .ffs {
     color: red;
   }
