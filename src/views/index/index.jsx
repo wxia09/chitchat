@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Sidebar from "../sidebar";
-import Friends from "../friends";
-import News from "../news";
 import DragSize from "../../components/DragSize";
+import Chat from "../chat/index";
 import "../../static/font/iconfont.css";
 import { http } from "../../utils/http";
 
@@ -21,8 +20,7 @@ class Index extends Component {
     return (
       <DragSize>
         <Sidebar />
-        <Friends />
-        <News />
+        <Chat />
       </DragSize>
     );
   }
