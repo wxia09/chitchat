@@ -9,13 +9,13 @@ import "./scss/index/index.scss";
 class Chat extends Component {
   render() {
     return (
-      <div className="flex chat">
+      <div className="flex chat flex-sub">
         <div className="list">
           <Roof />
           <List />
           <Contacts />
         </div>
-        <div className="message">
+        <div className="flex-sub">
           <Messages />
         </div>
       </div>

@@ -1,10 +1,14 @@
-// 消息输入列表
-
+import "../../scss/message/input.scss";
 import React from "react";
 
 class Input extends React.PureComponent {
   render() {
-    return <div>input</div>;
+    return (
+      <div className="input-box text-right">
+        <textarea name="" id="" rows="3" className="dis-b textarea" />
+        <button className="button">发送</button>
+      </div>
+    );
   }
 }
 
