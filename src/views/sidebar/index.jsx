@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./scss/index.scss";
 import Popover from "../../components/Popover";
+import { CURRENT_SLIDER_STATUS } from "../../reducers/chat/types";
 
 class Sidebar extends Component {
   constructor(props) {
@@ -36,6 +37,7 @@ class Sidebar extends Component {
       array.splice(oldIconIndex, 1, oldItem);
     }
     array.splice(index, 1, item);
+    this.props.setCurrentSliderStatus(index);
     this.setState({
       iconList: array,
       oldIconIndex: index,
@@ -55,7 +57,7 @@ class Sidebar extends Component {
         </Popover>
         {iconList.map((item, index) => (
           <div
-            className="slider-icon text-center"
+            className="slider-icon text-center cursor-pointer"
             onClick={() => {
               this.handleActive(index);
             }}
@@ -69,8 +71,15 @@ class Sidebar extends Component {
   }
 }
 
-export default connect(function mapStateToProps(state) {
-  return {
-    userInfo: state.defaultReducer.userInfo,
-  };
-})(Sidebar);
+export default connect(
+  function mapStateToProps(state) {
+    return {
+      userInfo: state.defaultReducer.userInfo,
+    };
+  },
+  function mapDispatchToProps(dispatch) {
+    return {
+      setCurrentSliderStatus: (v) => dispatch({ value: v, type: CURRENT_SLIDER_STATUS }),
+    };
+  }
+)(Sidebar);
