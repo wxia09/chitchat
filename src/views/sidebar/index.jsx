@@ -12,15 +12,15 @@ class Sidebar extends Component {
         {
           icon: "friends02",
           tip: "信息",
-          active: true,
+          active: false,
         },
         {
           icon: "friend1",
           tip: "通讯录",
-          active: false,
+          active: true,
         },
       ],
-      oldIconIndex: 0,
+      oldIconIndex: 1,
     };
     this.handleActive = this.handleActive.bind(this);
   }

@@ -1,11 +1,22 @@
-// 联系人列表
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import "../scss/contacts/index.scss";
+import { Item } from "../components/item";
+import Roof from "../roof";
 
-import React from "react";
-
-class Contacts extends React.Component {
+class Contacts extends Component {
   render() {
-    return <div>Contacts</div>;
+    return (
+      <div className={"friend"}>
+        <Roof />
+        <Item />
+      </div>
+    );
   }
 }
 
-export default Contacts;
+export default connect(function mapStateToProps(state) {
+  return {
+    userInfo: state.defaultReducer.userInfo,
+  };
+})(Contacts);

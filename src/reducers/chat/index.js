@@ -1,6 +1,6 @@
 import { CURRENT_SLIDER_STATUS } from "./types";
 let initState = {
-  currentSliderStatus: 0,
+  currentSliderStatus: 1,
 };
 
 function reducer(state = initState, action) {

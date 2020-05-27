@@ -1,6 +1,6 @@
 import React from "react";
 import "./scss/item.scss";
-export const FriendList = (props) => {
+export const Item = (props) => {
   let { item = {} } = props;
   return (
     <div className={"friend-list flex align-center"}>

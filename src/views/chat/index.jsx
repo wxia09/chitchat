@@ -21,7 +21,7 @@ class Chat extends Component {
     return (
       <div className="flex chat flex-sub">
         <div className="list">
-          <Roof />
+          {/*<Roof />*/}
           <ShowList />
         </div>
         <div className="flex-sub">
