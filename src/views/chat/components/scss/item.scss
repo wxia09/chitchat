@@ -4,8 +4,9 @@
   border-color: #eee;
   border-top-width: 1px;
   border-bottom-width: 1px;
-  border-top-style: solid;
+  //border-top-style: solid;
   border-bottom-style: solid;
+  margin-bottom: 10px;
   .avatar-name {
     .avatar {
       width: 30px;
@@ -21,4 +22,14 @@
       margin-left: 5px;
     }
   }
+}
+
+.hover:hover {
+  background: rgba(204, 204, 204, 0.5);
+}
+
+.title {
+  padding: 5px 0 10px 10px;
+  border-bottom: 1px solid #eee;
+  margin-top: 20px;
 }

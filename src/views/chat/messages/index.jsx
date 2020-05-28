@@ -8,9 +8,7 @@ class Message extends React.Component {
   render() {
     return (
       <div className="flex flex-direction message">
-        <div className="flex-sub messages">
-          <div className="title">这个是标题</div>
-        </div>
+        <div className="flex-sub messages">我是聊天页面</div>
         <Input />
       </div>
     );

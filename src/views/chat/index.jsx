@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import Roof from "./roof";
+// import Roof from "./roof";
 import Messages from "./messages";
 import List from "./list";
 import Contacts from "./contacts";
+import ContactsDetails from "./contacts/details/details";
+import { Title } from "./components/item";
 
 import { CURRENT_SLIDER_STATUS } from "../../reducers/chat/types";
 
@@ -18,6 +20,7 @@ class Chat extends Component {
     // This may happen if you return a Component instead of <Component /> from render.
     // Or maybe you meant to call this function rather than return it.
     let ShowList = [List, Contacts][props.currentSliderStatus];
+    let Info = [Messages, ContactsDetails][props.currentSliderStatus];
     return (
       <div className="flex chat flex-sub">
         <div className="list">
@@ -25,7 +28,9 @@ class Chat extends Component {
           <ShowList />
         </div>
         <div className="flex-sub">
-          <Messages />
+          <Title>
+            <Info />
+          </Title>
         </div>
       </div>
     );
