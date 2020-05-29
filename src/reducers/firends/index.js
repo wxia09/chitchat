@@ -1,6 +1,7 @@
-import { FRIENDS_LIST } from "./types";
+import { FRIENDS_LIST, FRIEND_APPLY_LIST, APPLY_LIST_OR_DETAILS } from "./types";
 const initState = {
   friendsList: [],
+  applyListOrDetails: false,
 };
 
 function reducer(state = initState, action) {
@@ -9,6 +10,18 @@ function reducer(state = initState, action) {
       return {
         ...state,
         [FRIENDS_LIST]: action.value,
+      };
+    },
+    [FRIEND_APPLY_LIST]() {
+      return {
+        ...state,
+        [FRIEND_APPLY_LIST]: action.value,
+      };
+    },
+    [APPLY_LIST_OR_DETAILS]() {
+      return {
+        ...state,
+        [APPLY_LIST_OR_DETAILS]: action.value,
       };
     },
   };

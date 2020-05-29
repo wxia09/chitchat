@@ -3,7 +3,7 @@ import "./scss/item.scss";
 export const Item = (props) => {
   let { item = {} } = props;
   return (
-    <div className={"friend-list flex align-center hover"}>
+    <div className={"friend-list flex align-center hover"} onClick={props.onClick || (() => {})}>
       <div className={"avatar-name flex align-center"}>
         <div className={"avatar"}>
           <img src={process.env.PUBLIC_URL + "/images/defaultAvatar.jpg"} alt="" />
@@ -18,7 +18,7 @@ export const Item = (props) => {
 export const Title = (props) => {
   return (
     <>
-      <div className="title">这个是标题</div>
+      <div className="title">{props.title}</div>
       {props.children}
     </>
   );

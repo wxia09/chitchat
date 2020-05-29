@@ -6,7 +6,7 @@ import Roof from "../roof";
 
 import { http } from "../../../utils/http";
 
-import { FRIENDS_LIST } from "../../../reducers/firends/types";
+import { FRIENDS_LIST, APPLY_LIST_OR_DETAILS } from "../../../reducers/firends/types";
 
 class Contacts extends Component {
   componentDidMount() {
@@ -20,7 +20,7 @@ class Contacts extends Component {
       });
   }
   handleClick(index) {
-    console.log(index);
+    this.props.setApplyListOrDetails(!!index);
   }
   render() {
     return (
@@ -28,7 +28,7 @@ class Contacts extends Component {
         <Roof />
         <Item item={{ name: "新的朋友" }} onClick={this.handleClick.bind(this, 0)} />
         {this.props.friendsList.map((item) => (
-          <Item item={item} key={item.id} onClick={this.handleClick.bind(this, 1)} />
+          <Item item={item} onClick={this.handleClick.bind(this, 1)} key={item.id} />
         ))}
       </div>
     );
@@ -45,6 +45,7 @@ export default connect(
   function mapDispatchToProps(dispatch) {
     return {
       setFriendsList: (v) => dispatch({ type: FRIENDS_LIST, value: v }),
+      setApplyListOrDetails: (v) => dispatch({ type: APPLY_LIST_OR_DETAILS, value: v }),
     };
   }
 )(Contacts);
