@@ -2,30 +2,59 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { http } from "../../../../utils/http";
-import { FRIEND_APPLY_LIST } from "../../../../reducers/firends/types";
+
+import { setFriendsApplyList } from "../../../../reducers/friends/thunk";
+
+import { Item } from "../../components/item";
+import Popover from "../../../../components/Popover";
+
+import "../../scss/contacts/detail/index.scss";
 
 class ApplyList extends React.PureComponent {
-  componentDidMount() {
-    http("friend/apply/list")
+  constructor(props) {
+    super(props);
+    this.friendApplyAgree = this.friendApplyAgree.bind(this);
+  }
+  friendApplyAgree({ id }) {
+    http("friend/apply/agree", { params: { id } })
       .then((res) => {
-        this.props.setFriendApplyList(res.data.data);
+        alert(res.data.message);
+        this.props.dispatch(setFriendsApplyList);
       })
       .catch((err) => {
         console.log(err);
       });
   }
+  componentDidMount() {
+    this.props.dispatch(setFriendsApplyList);
+  }
   render() {
-    return <div>我是申请列表</div>;
+    let { props } = this;
+    return (
+      <>
+        {props.friendsApplyList.map((item) => (
+          <Item item={item} key={item.id}>
+            <span className="flex-sub" />
+            <Popover trigger="hover">
+              <i className="iconfont icon-confirm cursor-pointer" onClick={() => this.friendApplyAgree(item)} />
+              <div className="friend-add-btn">添加</div>
+            </Popover>
+          </Item>
+        ))}
+      </>
+    );
   }
 }
 
 export default connect(
   function mapStateToProps(state) {
-    return {};
+    return {
+      friendsApplyList: state.friends.friendsApplyList,
+    };
   },
   function mapDispatchToProps(dispatch) {
     return {
-      setFriendApplyList: (v) => dispatch({ type: FRIEND_APPLY_LIST, value: v }),
+      dispatch,
     };
   }
 )(ApplyList);

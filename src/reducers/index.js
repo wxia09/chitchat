@@ -5,7 +5,7 @@ import createStore from "./createStore";
 
 import defaultReducer from "./defaultState";
 import chat from "./chat";
-import friends from "./firends";
+import friends from "./friends";
 
 const allReducer = combineReducers({
   defaultReducer,

@@ -1,4 +1,4 @@
-import { CURRENT_SLIDER_STATUS, CURRENT_INFO_STATUS } from "./types";
+import { CURRENT_SLIDER_STATUS } from "./types";
 let initState = {
   currentSliderStatus: 1,
 };

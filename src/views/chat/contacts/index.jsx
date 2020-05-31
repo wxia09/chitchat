@@ -6,7 +6,7 @@ import Roof from "../roof";
 
 import { http } from "../../../utils/http";
 
-import { FRIENDS_LIST, APPLY_LIST_OR_DETAILS } from "../../../reducers/firends/types";
+import { FRIENDS_LIST, APPLY_LIST_OR_DETAILS } from "../../../reducers/friends/types";
 
 class Contacts extends Component {
   componentDidMount() {

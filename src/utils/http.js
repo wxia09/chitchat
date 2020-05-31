@@ -5,7 +5,7 @@ import reducers from "../reducers";
 
 const http = defaultHttp.create();
 
-http.defaults.timeout = 5000;
+http.defaults.timeout = 15000;
 http.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
 http.interceptors.request.use(

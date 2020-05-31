@@ -10,7 +10,7 @@ import ContactsApplyList from "./contacts/details/list";
 import { Title } from "./components/item";
 
 import { CURRENT_SLIDER_STATUS } from "../../reducers/chat/types";
-import { APPLY_LIST_OR_DETAILS } from "../../reducers/firends/types";
+import { APPLY_LIST_OR_DETAILS } from "../../reducers/friends/types";
 
 import "./scss/index/index.scss";
 
@@ -22,7 +22,6 @@ class Chat extends React.PureComponent {
     // This may happen if you return a Component instead of <Component /> from render.
     // Or maybe you meant to call this function rather than return it.
     let ShowList = [List, Contacts][props.currentSliderStatus];
-    console.log(props.applyListOrDetails);
     let Info = [Messages, props.applyListOrDetails ? ContactsDetails : ContactsApplyList][props.currentSliderStatus];
     let title = ["xxx", "详细信息"][props.currentSliderStatus];
     return (
