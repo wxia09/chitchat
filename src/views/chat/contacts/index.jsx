@@ -6,7 +6,7 @@ import Roof from "../roof";
 
 import { http } from "../../../utils/http";
 
-import { FRIENDS_LIST, APPLY_LIST_OR_DETAILS } from "../../../reducers/friends/types";
+import { FRIENDS_LIST, APPLY_LIST_OR_DETAILS, CURRENT_SEL_FRIEND_ID } from "../../../reducers/friends/types";
 
 class Contacts extends Component {
   componentDidMount() {
@@ -19,8 +19,11 @@ class Contacts extends Component {
         console.log(err);
       });
   }
-  handleClick(index) {
+  handleClick(index, id) {
     this.props.setApplyListOrDetails(!!index);
+    if (id) {
+      this.props.setCurrentSelFriendId(id);
+    }
   }
   render() {
     return (
@@ -28,7 +31,7 @@ class Contacts extends Component {
         <Roof />
         <Item item={{ name: "新的朋友" }} onClick={this.handleClick.bind(this, 0)} />
         {this.props.friendsList.map((item) => (
-          <Item item={item} onClick={this.handleClick.bind(this, 1)} key={item.id} />
+          <Item item={item} onClick={this.handleClick.bind(this, 1, item.id)} key={item.id} />
         ))}
       </div>
     );
@@ -46,6 +49,7 @@ export default connect(
     return {
       setFriendsList: (v) => dispatch({ type: FRIENDS_LIST, value: v }),
       setApplyListOrDetails: (v) => dispatch({ type: APPLY_LIST_OR_DETAILS, value: v }),
+      setCurrentSelFriendId: (v) => dispatch({ type: CURRENT_SEL_FRIEND_ID, value: v }),
     };
   }
 )(Contacts);
