@@ -16,7 +16,8 @@ class ApplyList extends React.PureComponent {
     this.friendApplyAgree = this.friendApplyAgree.bind(this);
   }
   friendApplyAgree({ id }) {
-    http("friend/apply/agree", { params: { id } })
+    http
+      .put("friend/apply/agree/" + id)
       .then((res) => {
         alert(res.data.message);
         this.props.dispatch(setFriendsApplyList);
