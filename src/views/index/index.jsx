@@ -14,7 +14,6 @@ class Index extends Component {
       .then((res) => {
         let { data } = res.data;
         this.props.setUserInfo(data);
-        return;
         let socket = io(process.env.REACT_APP_SOCKET_URL, {
           query: {
             token: this.props.token,
