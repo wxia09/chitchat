@@ -2,7 +2,8 @@
   "name": "chat",
   "version": "1.0.0",
   "private": true,
-  "proxy": "http://47.97.210.115",
+  "proxy": "http://chitchatless.wxiain.com",
+  "homepage": "http://chitchat.wxiain.com",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
