@@ -30,7 +30,7 @@ class Chat extends React.PureComponent {
           {/*<Roof />*/}
           <ShowList />
         </div>
-        <div className="flex-sub">
+        <div className="flex-sub flex flex-direction">
           <Title title={title}>
             <Info />
           </Title>
