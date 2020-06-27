@@ -23,15 +23,6 @@ class Index extends Component {
         socket.on("receive", (data) => {
           console.log(data, 999999);
         });
-        if (data.id === 2) {
-          setTimeout((_) => {
-            socket.emit("send", {
-              message: "我给1发送",
-              receiveId: 1,
-              sendId: data.id,
-            });
-          }, 1000);
-        }
       })
       .catch((err) => {
         console.log(err);
